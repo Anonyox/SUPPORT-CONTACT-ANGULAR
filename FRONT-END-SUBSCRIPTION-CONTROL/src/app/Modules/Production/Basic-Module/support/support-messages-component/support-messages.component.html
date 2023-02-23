@@ -1,0 +1,229 @@
+<mat-card style="background-color: rgba(242, 239, 239, 0.815);">
+
+    <div class="row">
+
+
+        <form class="col-md-2 normal-form">
+
+            <div style="margin-top:10%;">
+                <mat-sidenav opened="true" style="height: 93.4vh; margin-left: -1%;">
+
+                    <mat-divider></mat-divider>
+                    <div style="background-color: white; color: black; height: 20vh;">
+                        <br>
+                        <div style="height: 40vh;background-color: white;">
+                            <img style="margin-top: 0%; color: black;" class="avatar mat-elevation-z8"
+                                src="../../../../../assets/pngwing.com.png" />
+
+                            <a mat-button class="menu-button" tabindex="-10"
+                                style="background-color: white; color: black; height: 30vh; top: 10%;">
+                                <div style="margin-left: 20%;">
+                                    <div class="row" *ngIf="enableTextSend">
+
+
+                                        <span style="font-size:60%;  text-transform: uppercase;">ATENDIDO POR
+                                            :
+                                            {{employee_NameAttendance}}</span>
+                                    </div>
+                                    <div class="row" *ngIf="!enableTextSend">
+
+
+                                        <span
+                                            style="font-size:60%; margin-left: 20%;  text-transform: uppercase;">ATENDIDO
+                                            POR
+                                            :
+                                            {{employee_NameAttendance}}</span>
+                                    </div>
+                                    <div class="row" *ngIf="enableTextSend">
+
+                                        <span style="font-size:60%; ">CLIENTE : {{customer_Name}}</span>
+
+                                    </div>
+                                    <div class="row" *ngIf="!enableTextSend">
+
+                                        <span style="font-size:60%; margin-left: 20%; ">CLIENTE :
+                                            {{customer_Name}}</span>
+
+                                    </div>
+                                    <div class="row" *ngIf="enableTextSend">
+
+
+                                        <span style="font-size:60%;  text-transform: uppercase;">REQUERENTE
+                                            :
+                                            {{customer_Requisition}}</span>
+                                    </div>
+                                    <div class="row" *ngIf="!enableTextSend">
+
+
+                                        <span
+                                            style="font-size:60%; margin-left: 8%;  text-transform: uppercase;">REQUERENTE
+                                            :
+                                            {{customer_Requisition}}</span>
+                                    </div>
+
+                                    <div class="row" *ngIf="enableTextSend">
+
+
+                                        <span style="font-size:60%; margin-left: 0%;">INÍCIO : {{initSupport | date:
+                                            'dd/MM/yyyy HH:mm:ss'}}</span>
+                                    </div>
+                                    <div class="row" *ngIf="!enableTextSend">
+
+
+                                        <span style="font-size:60%; margin-left: 8%;">INÍCIO : {{initSupport | date:
+                                            'dd/MM/yyyy HH:mm:ss'}}</span>
+                                    </div>
+                                    <div class="row" *ngIf="enableTextSend">
+
+
+                                        <span style="font-size:60%; margin-left: 0%;">FINALIZADO :
+                                            {{dateFinishedCall | date: "dd/MM/yyyy HH:mm:ss"}}</span>
+                                    </div>
+                                    <div class="row" *ngIf="!enableTextSend">
+
+
+                                        <span style="font-size:60%; margin-left: 15%;">FINALIZADO :
+                                            {{dateFinishedCall | date: "dd/MM/yyyy HH:mm:ss"}}</span>
+                                    </div>
+                                    <br>
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            <button type="button" class="btn btn-danger"
+                                                (click)="navigateFromSupportStatus()"
+                                                style="margin-left: -400%;">Voltar</button>
+                                        </div>
+                                        <div class="col-md-2" *ngIf="onButtons">
+                                            <button type="button" class="btn btn-warning" *ngIf="enableTextSend"
+                                                (click)="openDialog()" style="margin-left: -200%;">Transferir</button>
+                                        </div>
+                                        <div class="col-md-2" *ngIf="onButtons">
+                                            <button type="button" class="btn btn-success" *ngIf="enableTextSend"
+                                                (click)="openDialogFinished()"
+                                                style="margin-left: 70%;">Finalizar</button>
+                                        </div>
+
+
+                                    </div>
+
+                                </div>
+
+                            </a>
+                            <br>
+
+                        </div>
+
+
+                    </div>
+
+
+                    <br>
+
+
+
+                </mat-sidenav>
+            </div>
+
+        </form>
+
+        <form class="col-md-10 normal-form" style="width: 100%;" [formGroup]="formulario" (submit)="sendMessage()">
+
+
+
+            <div #scrollMe class="row" style="overflow:auto; height: xyz; margin-top: -4%; height: 85.5vh; border-color: transparent; width: 100.8%; margin-left: auto; border-style: groove; 
+                 background-color: rgba(242, 239, 239, 0.815);">
+
+
+                <div *ngFor="let item of callMessages">
+                    <!--CLIENTE-->
+                    <br>
+                    <mat-card
+                        style="margin-left: 20%; height:max-content; width:35%; border-radius:3%; border-style:none; margin-top:1%; background-color:rgb(102, 221, 253)"
+                        *ngIf="item.typeEmit == 'Client'">
+                        <mat-card-content>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <label class="control-label"
+                                        style="color: black;  overflow: hidden; text-transform:uppercase">{{item.supportCalled.support.customer.person.name}}</label>
+                                </div>
+
+
+                            </div>
+                            <br>
+                            <div class="row">
+
+
+                                <div class="col-md-6">
+                                    <label class="control-label"
+                                        style="color: black; max-width: 50ch; overflow: hidden;">Emitente :
+                                        {{item.supportCalled.support.requestBy}}</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="control-label"
+                                        style="color: black; float: right;">{{item.insercionDate |
+                                        date: 'dd/MM/yyyy HH:mm:ss'}}</label>
+                                </div>
+
+                            </div>
+
+
+
+
+                            <br>
+                            <br>
+                            <br>
+                            {{item.description}}
+                        </mat-card-content>
+                    </mat-card>
+
+                    <!--SERVIDOR-->
+                    <mat-card
+                        style="margin-left: 64.5%; height:max-content; width:35%; border-radius:3%; border-style:none; margin-top:1%; background-color:rgba(255, 255, 255, 0.900)"
+                        *ngIf="item.typeEmit == 'Support'">
+                        <mat-card-content>
+                            <label class="control-label" style="color: black; text-transform:uppercase">Login Solution |
+                                {{item.emitName}}</label>
+                            <label class="control-label" style="color: black; float: right;">{{item.insercionDate |
+                                date: 'dd/MM/yyyy HH:mm:ss'}}</label>
+                            <br>
+                            <br>
+                            <br>
+                            {{item.description}}
+                        </mat-card-content>
+                    </mat-card>
+                    <br>
+                </div>
+
+
+
+
+            </div>
+
+            <br>
+
+
+            <div class="row" style=" width: 101.5%; margin-top: auto; " *ngIf="onButtons">
+                <div class="col-md-10">
+                    <input class="form-control"
+                        style="margin-left: 24%; margin-top:1%; width:89%; text-transform: inherit;"
+                        [readOnly]="!enableTextSend" formControlName="description">
+                </div>
+                <div class="col-md-2">
+
+                    <button mat-button class="btn btn-primary" style="margin-left: 68%; margin-top:5%;" type="submit"
+                        [disabled]="!enableTextSend">
+                        <mat-icon>send</mat-icon>
+
+                        <span>Enviar</span>
+                    </button>
+
+
+                </div>
+
+            </div>
+
+        </form>
+
+    </div>
+
+
+</mat-card>

@@ -1,0 +1,106 @@
+<mat-toolbar *ngIf="canActivate()">
+    <mat-toolbar-row>
+      
+            <button style="float:left;" mat-button (click)="opened=!opened" *ngIf="showHomePageTitle()">
+                <mat-icon>menu</mat-icon>
+            </button>
+       
+       
+
+        <button style="float:left;" mat-button routerLink="home" *ngIf="!showMenuPageTitle()" (click)="opened=false">
+            <mat-icon>home</mat-icon>Página Inicial
+        </button>
+        <button style="float: left;" mat-button (click)="navigateToMenu()">
+            <mat-icon>apps</mat-icon>Menu Principal
+        </button>
+       
+
+        <button style="justify-content: flex-end;" mat-button class="menu-button" (click)="opened=false"
+            (click)="logout()" routerLink="">
+            <mat-icon>exit_to_app</mat-icon>
+            <span>Sair</span>
+        </button>
+
+
+    </mat-toolbar-row>
+</mat-toolbar>
+
+<mat-sidenav-container>
+    <mat-sidenav [(opened)]="opened" mode="side" *ngIf="canActivate()">
+        <img style="margin-top: 0%;" class="avatar mat-elevation-z8"
+            src="../../../../../assets/LOGIN SOLUTIONS - LOGO FUNDO AZUL.jpg" />
+        <mat-divider></mat-divider>
+
+        <a mat-button class="menu-button" routerLink="/customer">
+            <mat-icon>person_pin</mat-icon>
+            <span>Clientes</span>
+        </a>
+        <br>
+        <button mat-button class="menu-button" routerLink="/employee">
+            <mat-icon>supervised_user_circle</mat-icon>
+            <span>Usuários</span>
+        </button>
+        <br>
+        <button mat-button class="menu-button" routerLink="/city">
+            <mat-icon>location_city</mat-icon>
+            <span>Cidades</span>
+        </button>
+        <br>
+        <button mat-button class="menu-button" routerLink="/system">
+            <mat-icon>settings_system_daydream</mat-icon>
+            <span>Soluções</span>
+        </button>
+
+        <mat-divider></mat-divider>
+        <!-- 
+        <button mat-button class="menu-button" routerLink="/home">
+            <mat-icon>insert_drive_file</mat-icon>
+            <span>Relatórios</span>
+        </button>
+        <br> -->
+        <!-- <button mat-button class="menu-button" routerLink="/home">
+            <mat-icon>attach_money</mat-icon>
+            <span>Pagamentos</span>
+        </button>
+        <br> -->
+        <!-- <button mat-button class="menu-button" routerLink="/home">
+            <mat-icon>blocked</mat-icon>
+            <span>Bloqueios</span>
+        </button>
+        <br> -->
+        <button mat-button class="menu-button" routerLink="/support">
+            <mat-icon>contact_support</mat-icon>
+            <span>Chamados</span>
+        </button>
+        <!-- <br>
+        <button mat-button class="menu-button" routerLink="/home">
+            <mat-icon>access_alarm</mat-icon>
+            <span>Manutenção Programada</span>
+        </button> -->
+
+        <mat-divider></mat-divider>
+
+
+<!-- 
+        <button mat-button class="menu-button" routerLink="/permission">
+            <mat-icon>pan_tool</mat-icon>
+            <span>Permissões</span>
+        </button>
+        <br>
+        
+        <button mat-button class="menu-button" routerLink="/home">
+            <mat-icon>settings</mat-icon>
+            <span>Configurações</span>
+        </button> -->
+
+
+        <!-- <mat-divider></mat-divider> -->
+
+
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+        <router-outlet></router-outlet>
+    </mat-sidenav-content>
+
+</mat-sidenav-container>

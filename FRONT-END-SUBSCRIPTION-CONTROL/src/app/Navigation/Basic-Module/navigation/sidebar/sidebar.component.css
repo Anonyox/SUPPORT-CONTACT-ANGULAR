@@ -1,0 +1,81 @@
+.mat-sidenav-container{
+height: calc(209vh - 115.6vh);
+}
+.mat-sidenav{
+  width: 280px;
+  background-color: rgb(41, 67, 97);
+
+  
+ 
+  
+  border-right: none;
+ 
+  color: white;
+  /* border-radius: 10px; */
+  padding: 16px;
+  text-align: center;
+  
+}
+.mat-toolbar {
+  background-color: rgb(33, 37, 41)
+}
+.mat-button {
+  color: white;
+}
+.mat-icon{
+  color: white;
+  margin-right: 8px;
+}
+.mat-sidenav-content{
+  background: linear-gradient(-105deg, #eceaea, #154a86);
+}
+
+.content {
+  height: calc(100vh - 130px);
+  border-radius: 10px;
+  margin: 16px;
+  margin-left: 32px;
+
+  padding: 16px;
+
+  overflow: auto;
+}
+
+mat-sidenav-container {
+  height: calc(100vh - 65px);
+}
+
+.menu-button {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  font-size: 1rem;
+
+ 
+}
+
+.avatar {
+  margin-top: 16px;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+}
+
+.name {
+  margin-top: 8px;
+  font-weight: normal;
+}
+
+.designation {
+  margin-top: 2px;
+  font-size: 0.7rem;
+  color: lightgrey;
+}
+
+mat-divider {
+  margin-top: 16px;
+  margin-bottom: 16px;
+  background-color: rgba(255, 255, 255, 0.5);
+}
+

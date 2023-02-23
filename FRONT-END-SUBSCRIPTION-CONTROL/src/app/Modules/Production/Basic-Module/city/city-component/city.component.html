@@ -1,0 +1,49 @@
+<mat-card>
+
+  <mat-card-title>
+    <mat-icon>location_city</mat-icon> Cidades
+  </mat-card-title>
+
+  <mat-divider></mat-divider>
+
+  <br>
+
+  <form class="normal-form" [formGroup]="formulario">
+
+    <div class="row">
+      <div class="col-md-12">
+
+        <mat-form-field class="col-md-12">
+          <mat-placeholder>Pesquisar</mat-placeholder>
+          <input matInput type="search" formControlName="Search" [(ngModel)]="search" (keyup)="filterInDesc(search)">
+          <button mat-icon-button matSuffix color="primary" aria-label="search">
+            <mat-icon>search</mat-icon>
+          </button>
+        </mat-form-field>
+      </div>
+
+    </div>
+
+    <section class="example-container mat-elevation-z8" style="height: 78.5vh;" tabindex="0">
+      <table mat-table [dataSource]="citys">
+        <!-- Position Column -->
+        <!-- Name Column -->
+        <ng-container matColumnDef="Cidade">
+          <th mat-header-cell *matHeaderCellDef> Cidade </th>
+          <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+        </ng-container>
+
+        <!-- Weight Column -->
+        <ng-container matColumnDef="Estado">
+          <th mat-header-cell *matHeaderCellDef> Estado </th>
+          <td mat-cell *matCellDef="let element"> {{element.state}} </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+    </section>
+
+  </form>
+
+</mat-card>

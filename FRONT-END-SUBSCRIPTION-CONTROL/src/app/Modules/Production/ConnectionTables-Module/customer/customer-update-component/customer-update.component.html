@@ -1,0 +1,275 @@
+<mat-card>
+
+    <mat-card-title style="text-transform: uppercase;">
+        <mat-icon>person_pin</mat-icon> {{name}}
+    </mat-card-title>
+
+    <mat-divider></mat-divider>
+
+    <br>
+
+    <form [formGroup]="formulario" (ngSubmit)="submit()" class="normal-form">
+
+        <div class="row">
+
+            <div class="col-md-4">
+                <mat-form-field style="width: 100%;" appearance="legacy" class="col-md-4">
+                    <mat-label>Tipo de Pessoa :</mat-label>
+                    <mat-select required formControlName="TypeOfPersonView" [(ngModel)]="typePerson"
+                        (selectionChange)="controlForm()">
+                        <mat-option value="Física">Física</mat-option>
+                        <mat-option value="Jurídica">Jurídica</mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="TypeOfPersonView.invalid">{{getErrorMessage()}}</mat-error>
+                </mat-form-field>
+            </div>
+
+            <!--#region PESSOA FÍSICA-->
+            <div class="col-md-4" *ngIf="typePerson == 'Física'">
+                <mat-form-field style="width: 100%;" appearance="legacy" class="col-md-4">
+                    <mat-label>CPF :</mat-label>
+                    <input type="text" matInput required formControlName="cpFeCNPJ" mask="000.000.000-00" readonly>
+                    <mat-error *ngIf="CpfCnpj.invalid">Cpf Inválido</mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-md-2" *ngIf="typePerson == 'Física'">
+                <mat-form-field style="width: 100%;" appearance="legacy" class="col-md-4">
+                    <mat-label>RG :</mat-label>
+                    <input matInput required formControlName="rGeStateRegistration" readonly>
+                    <mat-error *ngIf="RgeStateRegistration.invalid">{{getErrorMessage()}}</mat-error>
+                </mat-form-field>
+            </div>
+            <!--#endregion-->
+            <!--#region PESSOA JURÍDICA-->
+            <div class="col-md-4" *ngIf="typePerson == 'Jurídica'">
+                <mat-form-field style="width: 100%;" appearance="legacy" class="col-md-4">
+                    <mat-label>CNPJ :</mat-label>
+                    <input matInput required formControlName="cpFeCNPJ" mask="00.000.000/0000-00" readonly>
+                    <mat-error *ngIf="CpfCnpj.invalid">Cnpj Inválido</mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-md-2" *ngIf="typePerson == 'Jurídica'">
+                <mat-form-field style="width: 100%;" appearance="legacy" class="col-md-4">
+                    <mat-label>Inscrição Estadual :</mat-label>
+                    <input matInput required formControlName="rGeStateRegistration" readonly>
+                    <mat-error *ngIf="RgeStateRegistration.invalid">{{getErrorMessage()}}</mat-error>
+                </mat-form-field>
+            </div>
+            <!--#endregion-->
+
+            <div class="col-md-2">
+                <mat-form-field style="width: 100%;" appearance="legacy" class="col-md-4">
+                    <mat-label>Situação Cadastral :</mat-label>
+                    <mat-select required formControlName="registrationSituation">
+                        <mat-option [value]="true">Ativo</mat-option>
+                        <mat-option [value]="false">Inativo</mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="RegistrationSituation.invalid">{{getErrorMessage()}}</mat-error>
+                </mat-form-field>
+            </div>
+
+        </div>
+
+        <div class="row">
+
+            <!--#region PESSOA FÍSICA-->
+            <div class="col-md-12" *ngIf="typePerson == 'Física'">
+                <mat-form-field style="width: 100%;" appearance="legacy" class="col-md-4">
+                    <mat-label>Nome :</mat-label>
+                    <input matInput required formControlName="name">
+                    <mat-error *ngIf="Name.invalid">{{getErrorMessage()}}</mat-error>
+                </mat-form-field>
+            </div>
+            <!--#endregion-->
+            <!--#region PESSOA JURÍDICA-->
+            <div class="col-md-6" *ngIf="typePerson == 'Jurídica'">
+                <mat-form-field style="width: 100%;" appearance="legacy" class="col-md-4">
+                    <mat-label>Nome :</mat-label>
+                    <input matInput required formControlName="name">
+                    <mat-error *ngIf="Name.invalid">{{getErrorMessage()}}</mat-error>
+                </mat-form-field>
+            </div>
+
+            <div class="col-md-2" *ngIf="typePerson == 'Jurídica'">
+                <mat-form-field style="width: 100%;" appearance="legacy" class="col-md-2">
+                    <mat-label>CNAE :</mat-label>
+                    <input matInput formControlName="cnae">
+                </mat-form-field>
+            </div>
+
+            <div class="col-md-4" *ngIf="typePerson == 'Jurídica'">
+                <mat-form-field style="width: 100%;" appearance="legacy" class="col-md-4">
+                    <mat-label>Nome Fantasia :</mat-label>
+                    <input matInput formControlName="fantasyName">
+                </mat-form-field>
+            </div>
+            <!--#endregion-->
+
+        </div>
+
+        <div class="row">
+            <div class="col-md-4">
+                <mat-form-field style="width: 100%;" appearance="legacy" class="col-md-4">
+                    <mat-label>CEP :</mat-label>
+                    <input matInput required formControlName="cep" mask="00000-000" [(ngModel)]="cep"
+                        (focusout)="searchCep(cep)">
+                    <mat-error *ngIf="Cep.invalid">{{getErrorMessage()}}</mat-error>
+                </mat-form-field>
+            </div>
+
+            <div class="col-md-4">
+                <mat-form-field style="width: 100%;" appearance="legacy" class="col-md-4">
+                    <mat-label>Código IBGE :</mat-label>
+                    <input matInput required formControlName="codIBGE" mask="00.0000-0">
+                    <mat-error *ngIf="CodIBGE.invalid">{{getErrorMessage()}}</mat-error>
+                </mat-form-field>
+            </div>
+
+            <div class="col-md-4">
+                <mat-form-field style="width: 100%;" appearance="legacy" class="col-md-4">
+                    <mat-label>Cidade :</mat-label>
+                    <input matInput formControlName="city">
+                </mat-form-field>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4">
+                <mat-form-field style="width: 100%;" appearance="legacy" class="col-md-4">
+                    <mat-label>Endereço :</mat-label>
+                    <input matInput required formControlName="address">
+                    <mat-error *ngIf="Address.invalid">{{getErrorMessage()}}</mat-error>
+                </mat-form-field>
+            </div>
+
+            <div class="col-md-4">
+                <mat-form-field style="width: 100%;" appearance="legacy" class="col-md-4">
+                    <mat-label>Bairro :</mat-label>
+                    <input matInput required formControlName="district">
+                    <mat-error *ngIf="Address.invalid">{{getErrorMessage()}}</mat-error>
+                </mat-form-field>
+            </div>
+
+            <div class="col-md-2">
+                <mat-form-field style="width: 100%;" appearance="legacy" class="col-md-2">
+                    <mat-label>Número :</mat-label>
+                    <input matInput required formControlName="number">
+                    <mat-error *ngIf="Number.invalid">{{getErrorMessage()}}</mat-error>
+                </mat-form-field>
+            </div>
+
+            <div class="col-md-2">
+                <mat-form-field style="width: 100%;" appearance="legacy" class="col-md-2">
+                    <mat-label>Complemento :</mat-label>
+                    <input matInput formControlName="complement">
+                </mat-form-field>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4">
+                <mat-form-field style="width: 100%;" appearance="legacy" class="col-md-4">
+                    <mat-label>Email :</mat-label>
+                    <input matInput required formControlName="email">
+                    <mat-error *ngIf="Email.invalid">{{getErrorMessage()}}</mat-error>
+                </mat-form-field>
+            </div>
+
+            <div class="col-md-3">
+                <mat-form-field style="width: 100%;" appearance="legacy" class="col-md-3">
+                    <mat-label>Telefone :</mat-label>
+                    <input matInput formControlName="landline" mask="(00) 0000-0000">
+                </mat-form-field>
+            </div>
+
+            <div class="col-md-3">
+                <mat-form-field style="width: 100%;" appearance="legacy" class="col-md-3">
+                    <mat-label>Celular :</mat-label>
+                    <input matInput formControlName="cellPhone" mask="(00) 00000-0000">
+                </mat-form-field>
+            </div>
+
+            <div class="col-md-2">
+                <mat-form-field style="width: 100%;" appearance="legacy" class="col-md-4" *ngIf="typePerson== 'Física'">
+                    <mat-label>Data de Nascimento :</mat-label>
+                    <input type="date" matInput required formControlName="birthDate">
+                    <mat-error *ngIf="BirthDate.invalid">{{getErrorMessage()}}</mat-error>
+                </mat-form-field>
+
+                <mat-form-field style="width: 100%;" appearance="legacy" class="col-md-4"
+                    *ngIf="typePerson == 'Jurídica'">
+                    <mat-label>Início das Atividades :</mat-label>
+                    <input type="date" matInput required formControlName="birthDate">
+                    <mat-error *ngIf="BirthDate.invalid">{{getErrorMessage()}}</mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+
+        <br>
+
+        <div class="row">
+            <div class="col-md-1">
+                <button mat-raised-button class="btn btn-success" type="submit">Salvar</button>
+            </div>
+            <div class="col-md-10">
+                <button mat-raised-button class="btn btn-danger" routerLink="/customer">Voltar</button>
+            </div>
+            <div class="col-md-1">
+                <button mat-raised-button style="margin-left: 1.5vh; position:absolute;" type="button" class="btn btn-primary" routerLink="/systemPackage/{{id}}/{{name}}">Soluções</button>
+            </div>
+
+        </div>
+
+        <br>
+
+        <section class="example-container mat-elevation-z8" tabindex="0" style="height: 47.1vh;">
+            <table mat-table [dataSource]="customers | filter:id">
+                <ng-container matColumnDef="Nome">
+                    <th mat-header-cell *matHeaderCellDef> Nome </th>
+                    <td mat-cell *matCellDef="let element"> {{element.person.name}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="CPF/CNPJ">
+                    <th mat-header-cell *matHeaderCellDef> CPF/CNPJ </th>
+
+                    <td mat-cell *matCellDef="let element">
+                        <div *ngIf="element.person.typeOfPerson == 'Física'">
+                            {{element.person.cpFeCNPJ | mask:'000.000.000-00'}}
+                        </div>
+
+                        <div *ngIf="element.person.typeOfPerson == 'Jurídica'">
+                            {{element.person.cpFeCNPJ | mask:'00.000.000/0000-00'}}
+                        </div>
+                    </td>
+
+                </ng-container>
+
+                <ng-container matColumnDef="Cidade">
+                    <th mat-header-cell *matHeaderCellDef> Cidade </th>
+                    <td mat-cell *matCellDef="let element"> {{element.person.city.name}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="Situação Cadastral">
+                    <th mat-header-cell *matHeaderCellDef>
+                        Situação Cadastral
+                    </th>
+                    <td mat-cell *matCellDef="let element"> {{element.person.registrationSituation == true ? "ATIVO" :
+                        "INATIVO"}}
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="Acoes" class="d-flex">
+                    <th mat-header-cell *matHeaderCellDef></th>
+                    <td mat-cell *matCellDef="let element" class="mat-cell" colspan="4">
+
+                    </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+        </section>
+
+    </form>
+
+</mat-card>

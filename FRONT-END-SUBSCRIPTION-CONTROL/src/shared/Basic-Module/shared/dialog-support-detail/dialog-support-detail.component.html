@@ -1,0 +1,127 @@
+<mat-card>
+    <mat-card-title>
+        <mat-icon>contact_support</mat-icon> Detalhes do Chamado
+        <button  class="btn btn-danger" type="button" style="float:right" *ngIf="formulario.value.status == 'Aberto'">
+            {{formulario.value.status}}
+        </button>
+        <button  class="btn btn-warning" type="button" style="float:right" *ngIf="formulario.value.status == 'Em Atendimento'">
+            {{formulario.value.status}}
+        </button>
+        <button  class="btn btn-success" type="button" style="float:right" *ngIf="formulario.value.status == 'Finalizado'">
+            {{formulario.value.status}}
+        </button>
+    </mat-card-title>
+    <mat-divider></mat-divider>
+    <mat-dialog-content>
+        <br>
+        <form [formGroup]="formulario" (submit)="submit()">
+            <div class="row">
+                <div class="col-md-12">
+                    <div>
+                        <mat-form-field style="width: 100%;" appearance="legacy" class="col-md-4">
+                            <br>
+                            <textarea matInput style=" resize: none;text-transform: uppercase;" readonly="true"
+                                placeholder="Título" formControlName="title">
+                     </textarea>
+                        </mat-form-field>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div>
+                        <mat-form-field style="width: 100%;" appearance="legacy" class="col-md-4">
+                            <br>
+                            <textarea matInput style=" resize: none;text-transform: uppercase;" readonly="true"
+                                placeholder="Cliente" formControlName="customerName">
+                     </textarea>
+                        </mat-form-field>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div>
+                        <mat-form-field style="width: 100%;" appearance="legacy" class="col-md-4">
+                            <br>
+                            <textarea matInput style=" resize: none;text-transform: uppercase;" readonly="true"
+                                placeholder="Requerente" formControlName="requestBy">
+                     </textarea>
+                        </mat-form-field>
+                    </div>
+
+                </div>
+                <div class="col-md-6">
+                    <div>
+                        <mat-form-field style="width: 100%;" appearance="legacy" class="col-md-4">
+                            <br>
+                            <textarea matInput style=" resize: none;text-transform: uppercase;" readonly="true"
+                                placeholder="Contatos" formControlName="contacts">
+                     </textarea>
+                        </mat-form-field>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div>
+                        <mat-form-field style="width: 100%;" appearance="legacy" class="col-md-4">
+                            <br>
+                            <textarea matInput style=" resize: none;text-transform: uppercase" readonly="true"
+                                placeholder="Solução" formControlName="systemPackage">
+                     </textarea>
+                        </mat-form-field>
+                    </div>
+
+                </div>
+                <div class="col-md-6">
+                    <div>
+                        <mat-form-field style="width: 100%;" appearance="legacy" class="col-md-4">
+                            <br>
+                            <textarea matInput style=" resize: none;text-transform: uppercase;" readonly="true"
+                                placeholder="Data e Hora de Abertura" formControlName="insercionDateFormat">
+                     </textarea>
+                        </mat-form-field>
+                    </div>
+
+                </div>
+            </div>
+            <div class="row">
+                <div>
+                    <mat-form-field style="width: 100%;" appearance="legacy" class="col-md-4">
+                        <br>
+                        <textarea matInput style=" resize: none;text-transform: uppercase;" readonly="true"
+                            placeholder="Descrição do Chamado" formControlName="description">
+                 </textarea>
+                    </mat-form-field>
+                </div>
+            </div>
+
+        </form>
+
+
+    </mat-dialog-content>
+    <br>
+    <mat-dialog-actions>
+        <form [formGroup]="formulario" (submit)="submit()">
+            <div class="row">
+                <div class="col-md-1">
+    
+                    <button class="btn btn-danger" type="button" (click)="close()">Voltar</button>
+                </div>
+                <div class="col-md-1" style="margin-left: 35%;">
+                    <button class="btn btn-success" type="submit" *ngIf="status == 'Aberto'">Atender</button>
+                </div>
+            </div>
+        </form>
+       
+
+
+    </mat-dialog-actions>
+</mat-card>

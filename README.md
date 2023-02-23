@@ -1,0 +1,1 @@
+Este Projeto Será desenvolvido para controle de assinaturas de pagantes por serviço prestado em conjunto com uma aplicação;

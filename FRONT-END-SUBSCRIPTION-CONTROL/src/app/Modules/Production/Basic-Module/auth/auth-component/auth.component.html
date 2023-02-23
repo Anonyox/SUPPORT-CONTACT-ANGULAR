@@ -1,0 +1,52 @@
+<form [formGroup]="formAuth">
+  <div class="col-md-12" style="@media screen and max-width: 400px;">
+    <div class="wrapper fadeInDown">
+      <div id="formContent">
+        <div class="fadeIn first">
+          <img src="../../../../../assets/LOGIN SOLUTIONS.png" id="icon" alt="User Icon">
+          
+        </div>
+
+        <form [formGroup]="formAuth">
+          <input class="form-control test" type="text" id="user" class="fadeIn second" name="nome" maxlength="50"
+            placeholder="Usuário" formControlName="username">
+          <input class="form-control test" type="password" id="password" class="fadeIn third" name="senha" max="6"
+            placeholder="Senha" formControlName="password">
+          <form action="?" method="post" style="margin-left: 16%;">
+            <div class="form-group">
+              <div class="g-recaptcha" data-sitekey="6LcZ0k4eAAAAACuW_67bU5zwRDv4-3RkPpAa0805"></div>
+            </div>
+          </form>
+          <input type="submit" id="Registrar" (click)="auth()" class="fadeIn fourth" value="Login">
+        </form>
+        <script type="text/javascript">
+          function valida() {
+            if (grecaptcha.getResponse() == "") {
+              alert("Precisa marcar a Validação")
+              return false;
+            }
+          }
+          function keyboardIsVisible() {
+            if (Keyboard.show()) {
+              console.alert("O teclado mobile está mostrando")
+            } else {
+              console.alert("Não está mostrando o teclado")
+            }
+          }
+        </script>
+        <div id="formFooter">
+          <a class="underlineHover" href="#">Login Solution <img style="zoom: 3%;  margin-top: 0%; rotate: 15%;" src="../../../../../../assets/foguete.png"></a>
+          
+    
+        </div>
+      </div>
+    </div>
+  </div>
+  <div>
+    
+    
+    
+    
+  </div>
+</form>
+
